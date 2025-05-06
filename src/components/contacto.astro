@@ -1,0 +1,291 @@
+---
+// Contacto.astro
+---
+
+<section id="Contacto" class="contact-container">
+
+    <div class="contact-content">
+        <h1 class="section-title font-bold">Conéctate Con Nosotros</h1>
+        
+        <p class="contact-intro font-bold">Te invitamos a formar parte de nuestra comunidad ancestral. Ya sea que tengas preguntas, desees compartir conocimientos, estamos aquí para ti.</p>
+        
+        <div class="contact-layout font-bold">
+            <div class="contact-form">
+                <h2 class="form-title font-bold">Envíanos un mensaje</h2>
+                <form id="ancestral-contact">
+                    <div class="form-group">
+                        <label for="name font-bold">Nombre Completo</label>
+                        <input type="text" id="name" name="name" required placeholder="Tu nombre completo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email font-bold">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required placeholder="tucorreo@ejemplo.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reason font-bold">Motivo de contacto</label>
+                        <select id="reason" name="reason">
+                            <option value="consulta">Consulta sobre servicios</option>
+                            <option value="ritual">Información sobre productos</option>
+                            <option value="ancestralidad">Conocimientos ancestrales</option>
+                            <option value="otro">Otro motivo</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group font-bold">
+                        <label for="message font-bold">Tu mensaje</label>
+                        <textarea id="message" name="message" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Enviar mensaje</button>
+                </form>
+            </div>
+            
+            <div class="contact-info">
+                <div class="info-card">
+                    <h3 class="info-title font-bold">Información de Contacto</h3>
+                    <div class="info-content font-bold">
+                        <p><i>📞</i> +573506821509</p>
+                        <p><i>✉️</i> manjarjoregeivan@gmail,com</p>
+                        <p><i>📍</i> clle22-7 , san andres de sotavento, colombia</p>
+                        <p><i>🕒</i> Lunes a Viernes: 9am - 6pm</p>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" class="social-icon">FB</a>
+                        <a href="#" class="social-icon">IG</a>
+                        <a href="#" class="social-icon">YT</a>
+                        <a href="#" class="social-icon">X</a>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <h3 class="info-title font-bold">¿Buscas una cotizacion para mayoristas?</h3>
+                    <div class="info-content font-bold">
+                        <p>Para cotizaciones para mayoristas, puedes agendar a través de nuestro sistema de citas en línea o contactando directamente al número telefónico.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="separator"></div>
+        
+       
+        <p class="ancestral-decoration  text black font-bold">"La sabiduría ancestral nos conecta con quienes fuimos para iluminar hacia dónde vamos"</p>
+        
+        <p class="footer-note  text black font-bold">Agradecemos tu interés en nuestro portafolio ancestral. Nos esforzaremos por responder a tu mensaje lo más pronto posible, usualmente dentro de 24-48 horas.</p>
+    </div>
+</section>
+
+<style>
+   
+    
+    .contact-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        
+        z-index: 0;
+    }
+    
+    
+    
+    .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 2.5rem;
+        color:  #fbbf24;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-shadow: 1px 1px 2px rgba(107, 68, 35, 0.2);
+        border-bottom: 2px solid #fbbf24;
+        padding-bottom: 10px;
+    }
+    
+    .contact-intro {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 1.1rem;
+        color: white;
+    }
+    
+    .contact-layout {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: space-between;
+    }
+    
+    .contact-form {
+        flex: 1 1 500px;
+        background-color: rgba(255, 255, 255, 0.4);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #fbbf24;
+    }
+    
+    .form-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #fbbf24;
+        border-bottom: 1px solid #d9c5a0;
+        padding-bottom: 10px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #fbbf24;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d9c5a0;
+        border-radius: 5px;
+        background-color: #fffcf5;
+        color: #393939;
+        font-size: 1rem;
+    }
+    
+    .form-group textarea {
+        height: 150px;
+        resize: vertical;
+    }
+    
+    .submit-btn {
+        background-color: #fbbf24;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: inline-block;
+    }
+    
+    .submit-btn:hover {
+        background-color: black;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 10px rgba(107, 68, 35, 0.2);
+    }
+    
+    .contact-info {
+        flex: 1 1 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .info-card {
+        background-color: rgba(255, 255, 255, 0.4);
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        border-left: 5px solid #fbbf24;
+    }
+    
+    .info-title {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        color: #fbbf24;
+        border-bottom: 1px solid #d9c5a0;
+        padding-bottom: 5px;
+    }
+    
+    .info-content p {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .info-content i {
+        margin-right: 10px;
+        color: #fbbf24;
+        font-size: 1.2rem;
+        width: 20px;
+        text-align: center;
+    }
+    
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        background-color: #fbbf24;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+        background-color: #fbbf24;
+        transform: translateY(-3px);
+    }
+    
+    .separator {
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #fbbf24, transparent);
+        margin: 40px 0;
+    }
+    
+    .map-container {
+        width: 100%;
+        height: 300px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border: 5px solid white;
+    }
+    
+    .ancestral-decoration {
+        text-align: center;
+        margin-top: 30px;
+        font-family: 'Times New Roman', Times, serif;
+        
+        font-style: italic;
+        letter-spacing: 1px;
+    }
+    
+    .footer-note {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 0.9rem;
+       
+        font-style: italic;
+    }
+    
+    @media (max-width: 768px) {
+        .contact-layout {
+            flex-direction: column;
+        }
+    }
+</style>
+

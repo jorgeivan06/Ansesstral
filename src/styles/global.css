@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Animación personalizada del fondo */
+@keyframes movimiento-fondo {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.bg-animado {
+  animation: movimiento-fondo 30s ease infinite;
+  background-size: 110% 110%;
+}
+img {
+    background-color: transparent;
+    mix-blend-mode: multiply;
+  }
+  
+  
