@@ -5,7 +5,7 @@
 
 Este proyecto es una vitrina digital creada con [Astro](https://astro.build), dedicada a resaltar el arte y la cultura ancestral del pueblo Zenú. Un homenaje al trabajo manual, la tradición oral y la identidad tejida a través de generaciones.
 
-![preview](./public/Capturareadme.jgp)
+(./public/Capturareadme.jgp)
 
 ## 📁 Estructura del Proyecto
 
