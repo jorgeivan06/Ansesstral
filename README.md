@@ -1,11 +1,11 @@
-# 🧵 Artesanías Zenú con Astro
+# Artesanías Zenú con Astro
 
 > Artesanías y sabiduría de la etnia Zenú hechas con caña flecha.  
 > **La sabiduría de nuestros ancestros vive en cada hebra de la caña flecha.**
 
 Este proyecto es una vitrina digital creada con [Astro](https://astro.build), dedicada a resaltar el arte y la cultura ancestral del pueblo Zenú. Un homenaje al trabajo manual, la tradición oral y la identidad tejida a través de generaciones.
 
-![preview](./public/capturareadme.jgp)
+![preview](./public/Capturareadme.jgp)
 
 ## 📁 Estructura del Proyecto
 
