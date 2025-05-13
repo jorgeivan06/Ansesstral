@@ -37,6 +37,27 @@ Este proyecto es una vitrina digital creada con [Astro](https://astro.build), de
 └── README.md
 
 
+## 💡 Misión
+
+Preservar y compartir la cultura Zenú a través de una vitrina digital que honra su tradición artesanal y saber ancestral.
+
+## 👁️ Visión
+
+Convertirse en un puente entre la sabiduría indígena y el mundo moderno, difundiendo el valor de las artesanías tejidas con historia.
+
+
+## Tecnologías Utilizadas
+
+Este proyecto fue desarrollado con un stack moderno y ligero:
+
+- ⚡ **Astro** – Framework para sitios estáticos ultrarrápidos.
+- 💡 **JavaScript (JS)** – Para interactividad y lógica.
+- 🧩 **JSX** – Para componentes reactivos y modulares.
+- 🎨 **HTML + CSS** – Maquetado semántico y estilos personalizados.
+- 🌬️ **Tailwind CSS** – Framework de utilidades para estilos responsivos.
+- 💻 **VS Code** – Editor de código principal.
+
+---
 
 
 
