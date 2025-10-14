@@ -1,48 +1,86 @@
-# Astro Starter Kit: Basics
+# Artesanías Zenú con Astro
 
-```sh
-npm create astro@latest -- --template basics
-```
+> Artesanías y sabiduría de la etnia Zenú hechas con caña flecha.  
+> **La sabiduría de nuestros ancestros vive en cada hebra de la caña flecha .** 
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+Este proyecto es una vitrina digital creada con [Astro](https://astro.build), dedicada a resaltar el arte y la cultura ancestral del pueblo Zenú. Un homenaje al trabajo manual, la tradición oral y la identidad tejida a través de generaciones.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+![Captura redme](https://github.com/user-attachments/assets/5f050a5b-94ae-4bfe-ab7a-b57dc783d280)
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+** Estructura del proyecto
 
 ```text
 /
 ├── public/
-│   └── favicon.svg
+│   └── preview.png
 ├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── contacto.astro
+│   │   ├── Header.astro
+│   │   ├── Mis Productos.astro
+│   │   ├── ProductosCarousel.jsx
+│   │   ├── sobre nosotros.astro
+│   │   └── Welcome.astro
 │   ├── layouts/
 │   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+│   ├── pages/
+│   │   └── index.astro
+│   └── styles/
+│       └── global.css
+├── .gitignore
+├── astro.config.mjs
+├── package.json
+├── package-lock.json
+├── tailwind.config.js
+├── tsconfig.json
+└── README.md
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
 
-## 🧞 Commands
+## 💡 Misión
 
-All commands are run from the root of the project, from a terminal:
+Preservar y compartir la cultura Zenú a través de una vitrina digital que honra su tradición artesanal y saber ancestral.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 👁️ Visión
 
-## 👀 Want to learn more?
+Convertirse en un puente entre la sabiduría indígena y el mundo moderno, difundiendo el valor de las artesanías tejidas con historia.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## Tecnologías Utilizadas
+
+Este proyecto fue desarrollado con un stack moderno y ligero:
+
+- ⚡ **Astro** – Framework para sitios estáticos ultrarrápidos.
+- 💡 **JavaScript (JS)** – Para interactividad y lógica.
+- 🧩 **JSX** – Para componentes reactivos y modulares.
+- 🎨 **HTML + CSS** – Maquetado semántico y estilos personalizados.
+- 🌬️ **Tailwind CSS** – Framework de utilidades para estilos responsivos.
+- 💻 **VS Code** – Editor de código principal.
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
