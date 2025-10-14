@@ -3,7 +3,9 @@
       <img src="/azul.jpeg" alt="Logo" class="h-8 rounded-full bg-white p-1" />
       <span class="text-amber-500 font-bold text-lg">Ansesstral</span>
     </div>
-  
+    <button class="md:hidden text-amber-500 focus:outline-none" id="menu-toggle">
+      ☰
+    </button>
     <nav class="hidden md:block bg-white/90 px-4 py-2 rounded-xl shadow-lg">
       <ul class="flex gap-6">
         <li><a href="#" class="text-black hover:text-amber-400 transition-colors font-medium">Inicio</a></li>
@@ -12,5 +14,13 @@
         <li><a href="#Contacto" class="text-black hover:text-amber-400 transition-colors font-medium">Contacto</a></li>
       </ul>
     </nav>
+    
+<script type="module">
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
   </header>
   
