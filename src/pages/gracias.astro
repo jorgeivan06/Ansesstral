@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const { searchParams } = Astro.url;
+const name = searchParams.get('name') || 'amig@';
+---
+
+<Layout>
+  <main 
+    class="flex flex-col justify-center items-center min-h-screen text-center bg-cover bg-center"
+    style="background-image: url('/varios.jpeg');"
+  >
+    <div class="bg-white/20 backdrop-blur-[1px] p-10 rounded-2xl shadow-xl max-w-xl mx-auto border border-amber-500/50">
+      <h1 class="text-4xl font-extrabold text-[#fbbf24] uppercase mb-4 drop-shadow-lg">
+        ¡Gracias, {name}!
+      </h1>
+      <p class="text-lg text-[#fbbf24] mb-6 font-medium drop-shadow-sm">
+        Hemos recibido tu mensaje y te responderemos lo antes posible.<br />
+        Mientras tanto, te invitamos a seguir explorando nuestras raíces ancestrales.
+      </p>
+      <a 
+        href="/" 
+        class="bg-[#fbbf24]/90 text-white px-6 py-3 rounded-lg font-semibold hover:bg-black transition-all duration-300 shadow-md"
+      >
+        Volver al inicio
+      </a>
+    </div>
+  </main>
+</Layout>

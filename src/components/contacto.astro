@@ -81,57 +81,57 @@
 
 
 
-
 <script>
-    // @ts-nocheck
-document.addEventListener('DOMContentLoaded', function() {
-    // ... resto del código
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('ancestral-contact');
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('ancestral-contact');
+  
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // ✅ Evita el envío normal con GET
     
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const submitBtn = form.querySelector('.submit-btn');
-        const originalText = submitBtn.textContent;
-        
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Enviando...';
-        
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            reason: document.getElementById('reason').value,
-            message: document.getElementById('message').value
-        };
-        
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            });
-            
-            const data = await response.json();
-            
-            if (response.ok) {
-                alert('¡Mensaje enviado exitosamente!');
-                form.reset();
-            } else {
-                alert(data.message || 'Error al enviar el mensaje.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Error de conexión. Intenta de nuevo.');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-        }
-    });
-})});
+    const submitBtn = form.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+    
+    const formData = {
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      reason: document.getElementById('reason').value,
+      message: document.getElementById('message').value.trim()
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('¡Mensaje enviado exitosamente!');
+        form.reset();
+
+        // ✅ OPCIONAL: redirigir después de enviar
+       const params = new URLSearchParams({ name: formData.name });
+window.location.href = `/gracias?${params.toString()}`;
+
+      } else {
+        alert(data.message || 'Error al enviar el mensaje.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error de conexión. Intenta de nuevo.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
+  });
+});
 </script>
+
     
 </section>
 
