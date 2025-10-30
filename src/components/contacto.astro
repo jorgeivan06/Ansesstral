@@ -47,7 +47,7 @@
                     <h3 class="info-title font-bold">Información de Contacto</h3>
                     <div class="info-content font-bold">
                         <p><i>📞</i> +573506821509</p>
-                        <p><i>✉️</i> manjarjoregeivan@gmail,com</p>
+                        <p><i>✉️</i> manjarjorgeivan@gmail.com</p>
                         <p><i>📍</i> clle22-7 , san andres de sotavento, colombia</p>
                         <p><i>🕒</i> Lunes a Viernes: 9am - 6pm</p>
                     </div>
@@ -76,6 +76,63 @@
         
         <p class="footer-note  text black font-bold">Agradecemos tu interés en nuestro portafolio ancestral. Nos esforzaremos por responder a tu mensaje lo más pronto posible, usualmente dentro de 24-48 horas.</p>
     </div>
+
+
+
+
+
+
+<script>
+    // @ts-nocheck
+document.addEventListener('DOMContentLoaded', function() {
+    // ... resto del código
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('ancestral-contact');
+    
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = form.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+        
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            reason: document.getElementById('reason').value,
+            message: document.getElementById('message').value
+        };
+        
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                alert('¡Mensaje enviado exitosamente!');
+                form.reset();
+            } else {
+                alert(data.message || 'Error al enviar el mensaje.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error de conexión. Intenta de nuevo.');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        }
+    });
+})});
+</script>
+    
 </section>
 
 <style>
