@@ -47,7 +47,7 @@ export async function POST({ request }) {
         // Email principal
         await transporter.sendMail({
             from: import.meta.env.EMAIL_USER,
-            to: 'manjarjoregeivan@gmail.com',
+            to: 'manjarjorgeivan@gmail.com',
             subject: `Nuevo contacto - ${reasonMap[reason] || reason}`,
             html: `
                 <h2>Nuevo mensaje de contacto</h2>
