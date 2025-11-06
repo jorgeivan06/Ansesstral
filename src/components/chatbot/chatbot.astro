@@ -1,0 +1,334 @@
+---
+// src/components/Chatbot/Chatbot.astro
+---
+
+<div id="chatbot-container"></div>
+
+<script is:inline>
+function renderChatbot() {
+  const chatbotHTML = `
+    <!-- Botón flotante -->
+    <button 
+      id="chatbotToggle" 
+      class="fixed bottom-4 right-4 w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-700 text-white rounded-full flex items-center justify-center cursor-pointer shadow-lg shadow-amber-500/30 z-50 text-xl transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-amber-500/40 border-2 border-amber-200"
+    >
+      💬
+    </button>
+    
+    <!-- Contenedor del chat -->
+    <div 
+      id="chatbotContainer" 
+      class="fixed bottom-16 right-4 w-72 h-80 bg-white rounded-xl shadow-xl flex flex-col font-sans z-40 overflow-hidden border border-amber-300 hidden"
+    >
+      <!-- Header -->
+      <div class="bg-gradient-to-br from-amber-500 to-amber-700 text-white px-3 py-2 flex justify-between items-center">
+        <div class="font-semibold text-sm flex items-center gap-1">
+          <span>💬 ArtezanIA</span>
+        </div>
+        <button 
+          id="chatbotClose" 
+          class="w-6 h-6 bg-white/20 text-white rounded-full flex items-center justify-center cursor-pointer text-sm transition-all duration-200 hover:bg-white/30"
+        >
+          ×
+        </button>
+      </div>
+      
+      <!-- Mensajes -->
+      <div 
+        id="chatbotMessages" 
+        class="flex-1 p-2 overflow-y-auto bg-amber-50 flex flex-col gap-1 text-sm"
+      >
+        <!-- Mensajes se cargan aquí -->
+      </div>
+      
+      <!-- PREVISUALIZACIÓN DE LO QUE ESCRIBES -->
+      <div id="typingPreview" class="px-3 py-1 bg-amber-100 border-t border-amber-200 hidden">
+        <div class="text-xs text-amber-700 font-medium">Escribiendo:</div>
+        <div id="previewText" class="text-xs text-amber-800 truncate"></div>
+      </div>
+      
+      <!-- Input -->
+      <div class="px-3 py-2 border-t border-amber-300 bg-white flex gap-2 items-center">
+        <input 
+          type="text" 
+          id="chatbotInput" 
+          placeholder="Pregunta sobre artesanías..."
+          maxlength="200"
+          class="flex-1 px-3 py-2 border border-amber-300 rounded-full outline-none text-xs transition-all duration-200 bg-amber-50 focus:bg-white focus:border-amber-500"
+        >
+        <button 
+          id="chatbotSend" 
+          class="w-8 h-8 bg-gradient-to-br from-amber-500 to-amber-700 text-white rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-105 text-sm"
+        >
+          ➤
+        </button>
+      </div>
+    </div>
+  `;
+  
+  const container = document.getElementById('chatbot-container');
+  if (container) {
+    container.innerHTML = chatbotHTML;
+    renderMessages();
+    setupTypingPreview(); // Nueva función para la previsualización
+  }
+}
+
+// NUEVA FUNCIÓN: Previsualización de escritura
+function setupTypingPreview() {
+  const input = document.getElementById('chatbotInput');
+  const previewContainer = document.getElementById('typingPreview');
+  const previewText = document.getElementById('previewText');
+  
+  if (input && previewContainer && previewText) {
+    let typingTimer;
+    
+    input.addEventListener('input', function() {
+      const text = this.value;
+      
+      // Mostrar/ocultar previsualización
+      if (text.length > 0) {
+        previewContainer.classList.remove('hidden');
+        previewText.textContent = text;
+      } else {
+        previewContainer.classList.add('hidden');
+      }
+      
+      // Efecto de cursor parpadeante
+      clearTimeout(typingTimer);
+      previewText.classList.remove('typing-cursor');
+      
+      typingTimer = setTimeout(() => {
+        previewText.classList.add('typing-cursor');
+      }, 500);
+    });
+    
+    // Ocultar previsualización al enviar
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        previewContainer.classList.add('hidden');
+      }
+    });
+  }
+}
+
+// AGREGAR ESTOS ESTILOS PARA EL CURSOR
+const style = document.createElement('style');
+style.textContent = `
+  .typing-cursor::after {
+    content: '|';
+    animation: blink 1s infinite;
+    color: #d97706;
+    font-weight: bold;
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+`;
+document.head.appendChild(style);
+
+// El resto de tu código JavaScript se mantiene igual...
+function createMessageElement(text, sender) {
+  const messageDiv = document.createElement('div');
+  
+  if (sender === 'user') {
+    messageDiv.className = 'max-w-[85%] px-3 py-2 rounded-lg text-white bg-gradient-to-br from-amber-500 to-amber-700 self-end text-xs leading-relaxed';
+  } else if (sender === 'typing') {
+    messageDiv.className = 'max-w-[85%] px-3 py-2 rounded-lg text-gray-500 bg-white self-start italic text-xs border border-gray-200';
+  } else {
+    messageDiv.className = 'max-w-[85%] px-3 py-2 rounded-lg text-gray-700 bg-white self-start text-xs leading-relaxed border border-amber-200 shadow-sm';
+  }
+  
+  messageDiv.textContent = text;
+  return messageDiv;
+}
+
+function addMessage(text, sender) {
+  const message = { text, sender, timestamp: new Date().toISOString() };
+  chatbotState.messages.push(message);
+  
+  const messagesContainer = document.getElementById('chatbotMessages');
+  if (messagesContainer) {
+    const messageElement = createMessageElement(text, sender);
+    messagesContainer.appendChild(messageElement);
+    scrollToBottom();
+  }
+  saveChatHistory();
+  
+  // Ocultar previsualización después de enviar
+  const previewContainer = document.getElementById('typingPreview');
+  if (previewContainer) {
+    previewContainer.classList.add('hidden');
+  }
+}
+
+// ... (el resto de tu código JavaScript existente)
+
+const CHATBOT_CONFIG = {
+  n8nWebhookUrl: 'http://localhost:5678/webhook/artezanIA',
+  botName: 'ArtezanIA',
+  welcomeMessage: '¡Hola! Soy ArtezanIA. ¿En qué puedo ayudarte sobre artesanías Zenú?',
+  typingDelay: 1000
+};
+
+let chatbotState = {
+  isOpen: false,
+  isTyping: false,
+  messages: []
+};
+
+function initChatbot() {
+  console.log('🔄 Inicializando chatbot con previsualización...');
+  renderChatbot();
+  loadChatHistory();
+  setupEventListeners();
+}
+
+function renderMessages() {
+  const messagesContainer = document.getElementById('chatbotMessages');
+  if (!messagesContainer) return;
+  
+  if (chatbotState.messages.length === 0) {
+    addMessage(CHATBOT_CONFIG.welcomeMessage, 'bot');
+    return;
+  }
+  
+  messagesContainer.innerHTML = '';
+  chatbotState.messages.forEach(message => {
+    const messageElement = createMessageElement(message.text, message.sender);
+    messagesContainer.appendChild(messageElement);
+  });
+  scrollToBottom();
+}
+
+async function sendMessageToServer(message) {
+  try {
+    showTypingIndicator();
+    const response = await fetch(CHATBOT_CONFIG.n8nWebhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: message })
+    });
+    
+    if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+    const data = await response.json();
+    hideTypingIndicator();
+    return data.choices[0].message.content;
+    
+  } catch (error) {
+    console.error('Error:', error);
+    hideTypingIndicator();
+    return 'Lo siento, hubo un error. Intenta nuevamente.';
+  }
+}
+
+async function handleSendMessage() {
+  const input = document.getElementById('chatbotInput');
+  const message = input.value.trim();
+  if (!message || chatbotState.isTyping) return;
+  
+  addMessage(message, 'user');
+  input.value = '';
+  
+  const sendButton = document.getElementById('chatbotSend');
+  sendButton.disabled = true;
+  
+  const botResponse = await sendMessageToServer(message);
+  addMessage(botResponse, 'bot');
+  
+  sendButton.disabled = false;
+  input.focus();
+}
+
+function showTypingIndicator() {
+  if (chatbotState.isTyping) return;
+  chatbotState.isTyping = true;
+  const messagesContainer = document.getElementById('chatbotMessages');
+  if (messagesContainer) {
+    const typingElement = createMessageElement('ArtezanIA está escribiendo...', 'typing');
+    typingElement.id = 'typingIndicator';
+    messagesContainer.appendChild(typingElement);
+    scrollToBottom();
+  }
+}
+
+function hideTypingIndicator() {
+  chatbotState.isTyping = false;
+  const typingElement = document.getElementById('typingIndicator');
+  if (typingElement) typingElement.remove();
+}
+
+function scrollToBottom() {
+  const messagesContainer = document.getElementById('chatbotMessages');
+  if (messagesContainer) {
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+}
+
+function setupEventListeners() {
+  setTimeout(() => {
+    const toggleBtn = document.getElementById('chatbotToggle');
+    const closeBtn = document.getElementById('chatbotClose');
+    const sendBtn = document.getElementById('chatbotSend');
+    const input = document.getElementById('chatbotInput');
+    const container = document.getElementById('chatbotContainer');
+    
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        chatbotState.isOpen = !chatbotState.isOpen;
+        if (container) container.classList.toggle('hidden', !chatbotState.isOpen);
+        if (chatbotState.isOpen && input) input.focus();
+      });
+    }
+    
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        chatbotState.isOpen = false;
+        if (container) container.classList.add('hidden');
+      });
+    }
+    
+    if (sendBtn) {
+      sendBtn.addEventListener('click', handleSendMessage);
+    }
+    
+    if (input) {
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          handleSendMessage();
+        }
+      });
+    }
+  }, 100);
+}
+
+function saveChatHistory() {
+  try {
+    localStorage.setItem('artezanIA_chat_history', JSON.stringify(chatbotState.messages));
+  } catch (error) {
+    console.warn('No se pudo guardar el historial:', error);
+  }
+}
+
+function loadChatHistory() {
+  try {
+    const saved = localStorage.getItem('artezanIA_chat_history');
+    if (saved) {
+      chatbotState.messages = JSON.parse(saved);
+      renderMessages();
+    }
+  } catch (error) {
+    console.warn('No se pudo cargar el historial:', error);
+  }
+}
+
+// Inicializar
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initChatbot);
+} else {
+  initChatbot();
+}
+</script>
