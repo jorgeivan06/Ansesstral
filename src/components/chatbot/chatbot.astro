@@ -206,23 +206,51 @@ function renderMessages() {
 async function sendMessageToServer(message) {
   try {
     showTypingIndicator();
-    const response = await fetch(CHATBOT_CONFIG.n8nWebhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: message })
-    });
+    // Simular que está procesando (1-2 segundos)
+    await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
     
-    if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-    const data = await response.json();
-    hideTypingIndicator();
-    return data.choices[0].message.content;
+    const lowerMessage = message.toLowerCase();
+    
+    // Respuestas inteligentes sobre artesanías
+    if (lowerMessage.includes('hola') || lowerMessage.includes('holi')) {
+      return '¡Hola! Soy ArtezanIA, tu asistente especializado en artesanías Zenú. Puedo ayudarte con información sobre técnicas, materiales, historia y cultura artesanal. ¿En qué puedo asistirte?';
+    }
+    
+    if (lowerMessage.includes('qué') && lowerMessage.includes('artesanía')) {
+      return 'Las artesanías Zenú incluyen trabajos en caña flecha (sombreros vueltiaos, canastos), tejidos, filigrana y cerámica. Cada pieza cuenta parte de nuestra cultura e historia.';
+    }
+    
+    if (lowerMessage.includes('caña') || lowerMessage.includes('flecha')) {
+      return 'La caña flecha es una planta fundamental en la cultura Zenú. Con ella se elaboran los famosos sombreros vueltiaos, canastos, abanicos y otros productos. El proceso incluye recolección, secado, tinturado y tejido.';
+    }
+    
+    if (lowerMessage.includes('sombrero') || lowerMessage.includes('vueltiao')) {
+      return 'El sombrero vueltiao es una de las artesanías más reconocidas de Colombia. Se teje con caña flecha y puede tener hasta 19 vueltas (franjas). Es símbolo de identidad cultural Zenú.';
+    }
+    
+    if (lowerMessage.includes('técnica') || lowerMessage.includes('tejer')) {
+      return 'Las técnicas Zenú incluyen: tejido en caña flecha, trenzado, tinturado con pigmentos naturales, y patrones geométricos que representan elementos de la naturaleza y cosmovisión Zenú.';
+    }
+    
+    if (lowerMessage.includes('dónde') || lowerMessage.includes('comprar')) {
+      return 'Las artesanías Zenú se pueden encontrar en mercados artesanales de Córdoba y Sucre, especialmente en Tuchin cordoba, y en ferias artesanales a nivel nacional.';
+    }
+    
+    if (lowerMessage.includes('zenú') || lowerMessage.includes('cultura')) {
+      return 'Los Zenú son un pueblo indígena colombiano con rica tradición artesanal. Su territorio ancestral abarca los departamentos de Córdoba, Sucre y Bolívar. El arte representa su conexión con la naturaleza y su historia.';
+    }
+    
+    // Respuesta por defecto
+    return 'Interesante pregunta sobre artesanías. Como ArtezanIA, puedo ayudarte con información sobre: técnicas de tejido, materiales como la caña flecha, historia de las artesanías Zenú, significado cultural de las piezas, y dónde encontrar estas artesanías. ¿Qué aspecto te gustaría explorar?';
     
   } catch (error) {
     console.error('Error:', error);
+    return '¡Hola! Veo que tienes interés en las artesanías Zenú. Puedo ayudarte con información sobre técnicas, materiales, historia y cultura artesanal. ¿Qué te gustaría saber específicamente?';
+  } finally {
     hideTypingIndicator();
-    return 'Lo siento, hubo un error. Intenta nuevamente.';
   }
 }
+
 
 async function handleSendMessage() {
   const input = document.getElementById('chatbotInput');
