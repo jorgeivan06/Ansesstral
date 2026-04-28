@@ -63,15 +63,26 @@ export default function ProductosCarousel() {
       }}
     >
       {productos.map((p, index) => (
-        <SwiperSlide key={index}>
-          <div className="bg-gray-100 rounded-lg shadow-md p-4 h-full flex flex-col">
-            <img
-              src={p.imagen}
-              alt={p.titulo}
-              className="w-full h-48 object-cover rounded mb-4"
-            />
-            <h3 className="text-xl text-amber-400 font-semibold mb-2">{p.titulo}</h3>
-            <p className="text-sm text-black">{p.descripcion}</p>
+        <SwiperSlide key={index} className="pb-12">
+          <div className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 h-full flex flex-col group border border-amber-50">
+            <div className="relative overflow-hidden h-64">
+              <img
+                src={p.imagen}
+                alt={p.titulo}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300"></div>
+            </div>
+            <div className="p-6 flex flex-col flex-grow">
+              <h3 className="text-2xl text-amber-800 font-bold mb-3 font-['Playfair_Display']">{p.titulo}</h3>
+              <p className="text-stone-600 leading-relaxed text-sm mb-4">{p.descripcion}</p>
+              <button className="mt-auto inline-flex items-center text-amber-700 font-bold hover:text-amber-500 transition-colors">
+                Ver detalles 
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
           </div>
         </SwiperSlide>
       ))}
